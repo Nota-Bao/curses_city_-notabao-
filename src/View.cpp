@@ -11,6 +11,8 @@ using std::string;
 View::View()
 {
   initscr();
+  keypad(stdscr, TRUE);
+
   background = newwin(DISPLAY_Y_SIZE, DISPLAY_X_SIZE, 0, 0);
   grid_window = newwin(Y_SIZE, X_SIZE, 1, 1);
   status_window = newwin(STATUS_Y_SIZE, STATUS_X_SIZE, 1, X_SIZE+2);

@@ -2,6 +2,7 @@
 #define STATUS_H
 
 #include "Constants.h"
+#include <ctime>
 
 class Status
 {
@@ -22,7 +23,7 @@ class Status
   protected:
 
   private:
-    tm date;
+    std::tm date;
     int iteration;
     int money;
 };

@@ -73,19 +73,15 @@ int main()
         loop_flag = false;
         break;
 
-      case 'h':
       case KEY_LEFT:
         cursor.move_cursor('w');
         break;
-      case 'j':
       case KEY_DOWN:
         cursor.move_cursor('s');
         break;
-      case 'k':
       case KEY_UP:
         cursor.move_cursor('n');
         break;
-      case 'l':
       case KEY_RIGHT:
         cursor.move_cursor('e');
         break;
