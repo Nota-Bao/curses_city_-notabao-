@@ -55,9 +55,12 @@ int main()
   string status_message;
   Cell* new_cell;
   time_t update_time = time(NULL);
+
+  int game_speed = 5;
+
   while (loop_flag)
   {
-    if (difftime(time(NULL), update_time) > 5)
+    if (difftime(time(NULL), update_time) > game_speed)
     {
       update(grid, status_grids, status);
       status.update_iteration();
@@ -69,6 +72,15 @@ int main()
 
     switch (input)
     {
+      case '1':
+        game_speed = 5;
+        break;
+      case '2':
+        game_speed = 3;
+        break;
+      case '3':
+        game_speed = 1;
+        break;
       case 'Q':
         loop_flag = false;
         break;
