@@ -74,12 +74,15 @@ int main()
     {
       case '1':
         game_speed = 5;
+        status_message = "Speed: >";
         break;
       case '2':
         game_speed = 3;
+        status_message = "Speed: >>";
         break;
       case '3':
         game_speed = 1;
+        status_message = "Speed: >>>";
         break;
       case 'Q':
         loop_flag = false;
