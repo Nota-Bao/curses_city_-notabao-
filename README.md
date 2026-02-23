@@ -12,29 +12,39 @@
  
  ## Instructions and Keybinds:
  'r' : New Residential Zone
+ 
  'c' : New Commercial Zone
+ 
  'i' : New Industrial Zone
  
  'o' : New Road
+ 
  'd' : New Rail Road
  
  'p' : New Police Station
+ 
  'f' : New Fire Station
+ 
  's' : New School
+ 
  'm' : New Hospital
  
  'a' : New Park
  
  'w' : New Coal Power Plant (Cheap)
+ 
  'n' : New Nuclear Power Plant (Expensive)
  
  'x' : Bulldoze
 
  '1' : Slow speed
+ 
  '2' : Medium speed
+ 
  '3' : Fast speed
 
  'q' : Pause game
+ 
  'Q' : Exit game
 
  Movement: Arrow keys
