@@ -6,6 +6,8 @@
 #include <string>
 using std::string;
 
+#include <fstream>
+
 class Status
 {
   public:
@@ -27,6 +29,8 @@ class Status
     string get_speed_label() const { return speed_label; }
     void set_speed_label(string s) { speed_label = s; }
 
+    void save(std::ofstream& out);
+    void load(std::ifstream& in);
   protected:
 
   private:

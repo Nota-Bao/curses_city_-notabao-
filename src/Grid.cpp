@@ -8,6 +8,8 @@ using std::string;
 #include "Cell.h"
 #include "Cell_factory.h"
 
+#include <string>
+
 Grid::Grid()
 {
   grid.resize(Y_SIZE);
@@ -110,4 +112,48 @@ void Grid::update_state()
       grid[y][x]->update_state();
     }
   }
+}
+
+// Helper to map "Coal Power Plant" back to 'w', etc.
+char map_type_to_cmd(std::string type) {
+    if (type == RESIDENTIAL)         return 'r';
+    if (type == COMMERCIAL)          return 'c';
+    if (type == INDUSTRIAL)          return 'i';
+    if (type == ROAD)                return 'o';
+    if (type == RAIL)                return 'd';
+    if (type == POLICE_STATION)      return 'p';
+    if (type == FIRE_STATION)        return 'f';
+    if (type == SCHOOL)              return 's';
+    if (type == HOSPITAL)            return 'm';
+    if (type == PARK)                return 'a';
+    if (type == COAL_POWER_PLANT)    return 'w';
+    if (type == NUCLEAR_POWER_PLANT) return 'n';
+    return 'x'; // Default to Land
+}
+
+void Grid::save(std::ofstream& out) {
+    for (int y = 0; y < Y_SIZE; ++y) {
+        for (int x = 0; x < X_SIZE; ++x) {
+            out << grid[y][x]->get_type() << "\n";
+            out << grid[y][x]->get_state() << "\n";
+        }
+    }
+}
+
+void Grid::load(std::ifstream& in) {
+    std::string type_name, state_str;
+    for (int y = 0; y < Y_SIZE; ++y) {
+        for (int x = 0; x < X_SIZE; ++x) {
+            if (!std::getline(in, type_name)) break;
+            if (!std::getline(in, state_str)) break;
+            
+            char cmd = map_type_to_cmd(type_name);
+            Cell* new_cell = Cell_factory::create_cell(cmd, y, x);
+            if (new_cell) {
+                new_cell->set_state(std::stoi(state_str));
+                delete grid[y][x]; // Clean up old memory
+                grid[y][x] = new_cell;
+            }
+        }
+    }
 }

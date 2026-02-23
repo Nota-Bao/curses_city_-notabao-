@@ -4,6 +4,7 @@
 #include <vector>
 #include <map>
 #include <string>
+#include <fstream>
 
 #include "Logger.h"
 #include "Status.h"
@@ -27,6 +28,8 @@ class Grid
 
     Cell* get_cell(int y, int x) {return grid[y][x];}
 
+    void save(std::ofstream& out);
+    void load(std::ifstream& in);
   protected:
 
   private:

@@ -36,6 +36,7 @@ class Cell
     virtual char draw(Grid& grid, int& color_pair, bool& acs, bool& bold) = 0;
 
     int get_state() {return state;}
+    void set_state(int s) { state = s; }
     std::string get_type() {return type;}
     int get_price() {return price;}
     std::vector<std::pair<std::string, int> > get_attributes() {return attributes;}

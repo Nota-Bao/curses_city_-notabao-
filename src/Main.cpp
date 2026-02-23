@@ -15,6 +15,7 @@ using std::make_pair;
 
 #include <cstdlib>
 #include <ctime>
+#include <fstream>
 
 #include "Constants.h"
 #include "View.h"
@@ -72,6 +73,27 @@ int main()
 
     switch (input)
     {
+      case 'S': {
+        std::ofstream save_file("savegame.dat");
+        status.save(save_file);
+        grid.save(save_file);
+        status_message = "CITY ARCHIVED";
+        break;
+      }
+      case 'L': {
+        std::ifstream load_file("savegame.dat");
+          if (load_file.is_open()) {
+            status.load(load_file);
+            grid.load(load_file);
+            load_file.close();
+
+            // Force-refresh the simulation and the screen
+            update_status_grids_land_values(grid, status_grids);
+            view.draw_background(status, "CITY RESTORED");
+            view.draw_grid_window(cursor, grid);
+          }
+        break;
+      }
       case '1':
         game_speed = 5;
         status.set_paused(false);
