@@ -60,7 +60,7 @@ int main()
 
   while (loop_flag)
   {
-    if (difftime(time(NULL), update_time) > game_speed)
+    if (!status.get_paused() && difftime(time(NULL), update_time) > game_speed)
     {
       update(grid, status_grids, status);
       status.update_iteration();
@@ -74,15 +74,22 @@ int main()
     {
       case '1':
         game_speed = 5;
-        status_message = "Speed: >";
+        status.set_paused(false);
+        status.set_speed_label(">");
         break;
       case '2':
         game_speed = 3;
-        status_message = "Speed: >>";
+        status.set_paused(false);
+        status.set_speed_label(">>");
         break;
       case '3':
         game_speed = 1;
-        status_message = "Speed: >>>";
+        status.set_paused(false);
+        status.set_speed_label(">>>");
+        break;
+      case 'q':
+        status.set_paused(!status.get_paused());
+        status.set_speed_label(status.get_paused() ? "|| PAUSED" : ">");
         break;
       case 'Q':
         loop_flag = false;

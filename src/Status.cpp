@@ -4,6 +4,9 @@ Status::Status() : iteration(0), money(STARTING_MONEY)
 {
   date.tm_mon = 0;
   date.tm_year = 0;
+
+  paused = false;
+  speed_label = ">";
 }
 
 void Status::update_date()

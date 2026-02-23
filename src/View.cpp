@@ -50,6 +50,14 @@ void View::draw_background(Status& status, string status_message)
   mvwaddch(background, DISPLAY_Y_SIZE-1, X_SIZE+1, ACS_SSBS);
   mvwprintw(background, 0, 35, "Curses City");
 
+  if (status.get_paused()) {
+    wattrset(background, COLOR_PAIR(RED) | A_STANDOUT | A_BOLD);
+  } else {
+    wattrset(background, COLOR_PAIR(MAGENTA) | A_STANDOUT);
+  }
+  mvwprintw(background, 0, X_SIZE - 25, " [%s] ", status.get_speed_label().c_str());
+  wattrset(background, COLOR_PAIR(WHITE));
+
   wattrset(background, COLOR_PAIR(CYAN) | A_STANDOUT);
   mvwprintw(background, 0, 2, status_message.c_str());
   wattrset(background, COLOR_PAIR(WHITE));

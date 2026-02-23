@@ -3,6 +3,8 @@
 
 #include "Constants.h"
 #include <ctime>
+#include <string>
+using std::string;
 
 class Status
 {
@@ -20,12 +22,20 @@ class Status
     void update_date();
     char* get_date();
 
+    bool get_paused() const { return paused; }
+    void set_paused(bool p) { paused = p; }
+    string get_speed_label() const { return speed_label; }
+    void set_speed_label(string s) { speed_label = s; }
+
   protected:
 
   private:
     std::tm date;
     int iteration;
     int money;
+
+    bool paused;
+    string speed_label;
 };
 
 #endif
