@@ -62,7 +62,11 @@ void View::draw_background(Status& status, string status_message)
   mvwprintw(background, 0, 2, status_message.c_str());
   wattrset(background, COLOR_PAIR(WHITE));
 
-  wattrset(background, COLOR_PAIR(YELLOW) | A_STANDOUT);
+  if (status.get_money() == 0) {
+    wattrset(background, COLOR_PAIR(RED) | A_STANDOUT | A_BOLD);
+  } else {
+    wattrset(background, COLOR_PAIR(YELLOW) | A_STANDOUT);
+  }
   mvwprintw(background, 0, X_SIZE+3, " $%9d ", status.get_money());
   wattrset(background, COLOR_PAIR(WHITE));
 
