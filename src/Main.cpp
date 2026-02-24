@@ -96,6 +96,12 @@ int main()
           }
         break;
       }
+      case 'R':
+        grid.clear();
+        status = Status();
+        update_time = time(NULL);
+        status.set_message(" CITY RESET ");
+        break;
       case '1':
         game_speed = 5;
         status.set_paused(false);

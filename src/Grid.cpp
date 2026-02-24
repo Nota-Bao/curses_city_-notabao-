@@ -70,6 +70,15 @@ std::string Grid::replace(int y, int x, Cell* new_cell)
   return "";
 }
 
+void Grid::clear() {
+  for (int y = 0; y < Y_SIZE; ++y) {
+    for (int x = 0; x < X_SIZE; ++x) {
+      delete grid[y][x];
+      grid[y][x] = Cell_factory::create_cell('x', y, x);
+    }
+  }
+}
+
 void Grid::collect_taxes(Status& status)
 {
   for (int y=0; y<Y_SIZE; ++y)

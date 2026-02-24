@@ -30,6 +30,8 @@ class Grid
 
     void save(std::ofstream& out);
     void load(std::ifstream& in);
+
+    void clear();
   protected:
 
   private:
