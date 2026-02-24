@@ -53,7 +53,7 @@ int main()
 
   bool loop_flag = true;
   int input;
-  string status_message;
+  //string status_message;
   Cell* new_cell;
   time_t update_time = time(NULL);
 
@@ -77,7 +77,8 @@ int main()
         std::ofstream save_file("savegame.dat");
         status.save(save_file);
         grid.save(save_file);
-        status_message = "CITY ARCHIVED";
+        status.set_message(" CITY ARCHIVED ");
+        view.draw_background(status, status.get_message());
         break;
       }
       case 'L': {
@@ -89,7 +90,8 @@ int main()
 
             // Force-refresh the simulation and the screen
             update_status_grids_land_values(grid, status_grids);
-            view.draw_background(status, "CITY RESTORED");
+            status.set_message(" CITY RESTORED ");
+            view.draw_background(status, status.get_message());
             view.draw_grid_window(cursor, grid);
           }
         break;
@@ -98,20 +100,24 @@ int main()
         game_speed = 5;
         status.set_paused(false);
         status.set_speed_label(">");
+        status.set_message("");
         break;
       case '2':
         game_speed = 3;
         status.set_paused(false);
         status.set_speed_label(">>");
+        status.set_message("");
         break;
       case '3':
         game_speed = 1;
         status.set_paused(false);
         status.set_speed_label(">>>");
+        status.set_message("");
         break;
       case 'q':
         status.set_paused(!status.get_paused());
         status.set_speed_label(status.get_paused() ? "|| PAUSED" : ">");
+        status.set_message("");
         break;
       case 'Q':
         loop_flag = false;
@@ -119,15 +125,19 @@ int main()
 
       case KEY_LEFT:
         cursor.move_cursor('w');
+        status.set_message("");
         break;
       case KEY_DOWN:
         cursor.move_cursor('s');
+        status.set_message("");
         break;
       case KEY_UP:
         cursor.move_cursor('n');
+        status.set_message("");
         break;
       case KEY_RIGHT:
         cursor.move_cursor('e');
+        status.set_message("");
         break;
 
       case '\n':
@@ -137,7 +147,8 @@ int main()
         
       case 'x':
         new_cell = Cell_factory::create_cell(input, cursor.get_y(), cursor.get_x());
-        status_message = grid.replace(cursor.get_y(), cursor.get_x(), new_cell);
+        status.set_message(grid.replace(cursor.get_y(), cursor.get_x(), new_cell));
+        status.set_message(" Land removed. ");
         update_status_grids_land_values(grid, status_grids);
         break;
 
@@ -145,13 +156,15 @@ int main()
         new_cell = Cell_factory::create_cell(input, cursor.get_y(), cursor.get_x());
         if (new_cell)
         {
-          status_message = grid.build(cursor.get_y(), cursor.get_x(), new_cell, status); 
+          std::string result = new_cell->get_type();
+          status.set_message(grid.build(cursor.get_y(), cursor.get_x(), new_cell, status));
+          status.set_message(" " + result + " Constructed! ");
           update_status_grids_land_values(grid, status_grids);
         }
         break;
     }
 
-    view.draw_background(status, status_message);
+    view.draw_background(status, status.get_message());
     view.draw_grid_window(cursor, grid);
     view.draw_status_window(cursor, status, grid.get_cell(cursor.get_y(), cursor.get_x())->get_land_values(), status_grids);
   }

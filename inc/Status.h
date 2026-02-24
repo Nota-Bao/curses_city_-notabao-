@@ -11,8 +11,10 @@ using std::string;
 class Status
 {
   public:
+    //~Status() {}
     Status();
-    ~Status() {}
+    void set_message(std::string msg) { current_message = msg; }
+    std::string get_message() const { return current_message; }
 
     void add_money(int amount) {money += amount;}
     void sub_money(int amount) {money -= amount;}
@@ -40,6 +42,7 @@ class Status
 
     bool paused;
     string speed_label;
+    std::string current_message;
 };
 
 #endif
